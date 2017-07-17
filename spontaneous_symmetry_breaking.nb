@@ -1,0 +1,51 @@
+(*Given Potential*)
+V[\[CurlyPhi]_, \[Mu]_] := -\[Mu]^2 \[CurlyPhi]^2/
+     2 + \[Lambda]^2 \[CurlyPhi]^4 /2 ;
+(*Maxima Minima Routine*)  
+	(*Points of Inflection*)
+	\[Delta]  = Solve[ V'[\[CurlyPhi]] == 0, \[CurlyPhi]];
+	Subscript[\[CurlyPhi], 1] = \[Delta][[1]];
+	Subscript[\[CurlyPhi], 2] = \[Delta][[2]];
+	Subscript[\[CurlyPhi], 3] = \[Delta][[3]];
+V''[\[CurlyPhi]] ;
+(*\[Epsilon] =Replace[V''[\[CurlyPhi]] ,\[CurlyPhi] \[Rule] \
+Subscript[\[CurlyPhi], 1]]*)
+(*If[\[Epsilon] > 0,Print["The minima is Subscript[\[CurlyPhi], \
+1]"],Print["The maxima is Subscript[\[CurlyPhi], 2]"]]*)
+
+(* TO DO *)
+
+\[Lambda] = 
+  1;(*For the shake of plotting \[Lambda] is taken constant*)
+(*2D view*)
+Manipulate[
+ Plot[y = -\[Mu]^2 \[CurlyPhi]^2/2 + \[Lambda]^2 \[CurlyPhi]^4 /
+      2 , {\[CurlyPhi], -8, 8}], {{\[Mu], 0, 
+   "Symmetry breaking parameter"}, -6, 6, Appearance -> "Labeled"}]
+(* The potential  is symmetric for \[Lambda] = 0 and the symmetry
+breaks spontaneously in either directions of \[Lambda] giving the
+peculiar Mexican hat*)
+
+(*--------------3D version--------------*)
+(*A more realistic 3D view*)
+V[\[CurlyPhi]_, \[Mu]_] := -\[Mu] \[CurlyPhi]^2/
+    2 + \[Lambda]^2 \[CurlyPhi]^4 /
+    2(*Square and 4th power terms \[CurlyPhi]^4+\[Mu] \[CurlyPhi]^2*)
+\
+
+Manipulate[
+ RevolutionPlot3D[
+  V[\[CurlyPhi], \[Mu]], {\[CurlyPhi], 0, 2}, {q, 0, 2 Pi}, 
+  PlotPoints -> 30, PlotStyle -> Opacity[.5], Mesh -> 20, 
+  MeshStyle -> Opacity[.5], SphericalRegion -> True, 
+  BoxRatios -> {1, 1, .5}, ImageSize -> 400 , 
+  PlotLabel -> 
+   "Spontaneous Symmetring Breaking \nin Electroweak Potential in
+Early Universe"], {{\[Mu], 4, "Symmetry breaking parameter"}, -6, 6, 
+  Appearance -> "Labeled"}, {{\[CurlyPhi], 10, 
+   "Potential in Lagrangian"}, 1, 10, 
+  Appearance -> "Labelled"}, {{\[Mu] , 1, "Scalar \[Mu] "}, -5, 5 , 
+  Appearance -> "Labelled"}]
+(* The potential  is symmetric for \[Lambda] = 0 and the symmetry
+breaks spontaneously in either directions of \[Lambda] giving the
+peculiar Mexican hat*)
